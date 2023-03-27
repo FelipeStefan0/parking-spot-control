@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/parking-spot")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/parking-spot")
 public class ParkingSpotController {
 
     final ParkingSpotService parkingSpotService;
