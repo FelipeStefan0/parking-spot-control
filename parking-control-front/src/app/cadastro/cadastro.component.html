@@ -1,47 +1,69 @@
 <form [formGroup]="parkingSpot" (ngSubmit)="onSubmit()">
     <div class="grid-1">
         <div class="item-1">
-            <label for="parkingSpotNumber">Vaga: </label>
-            <input type="text" id="parkingSpotNumber" formControlName="parkingSpotNumber">
+            <label for="parkingSpotNumber">Vaga:</label>
+            <input type="text" id="parkingSpotNumber" formControlName="parkingSpotNumber" autocomplete="off">
         </div>
         <div class="item-2">
-            <label for="apartment">Apartamento: </label>
-            <input type="text" name="apartment" formControlName="apartment">
+            <label for="apartment">Apartamento:</label>
+            <input type="text" name="apartment" formControlName="apartment" autocomplete="off">
         </div>
         <div class="item-3">
             <label for="block">Bloco: </label>
-            <input type="text" name="block" formControlName="block">
+            <input type="text" name="block" formControlName="block" autocomplete="off">
         </div>
     </div>
     <div class="grid-2">
         <div class="item-1">
-            <label for="">Nome do Responsável: </label>
-            <input type="text" name="responsibleName" formControlName="responsibleName">
+            <label for="responsibleName">Nome do Responsável:</label>
+            <input type="text" name="responsibleName" formControlName="responsibleName" autocomplete="off">
         </div>
     </div>
     <div class="grid-3">
         <div class="item-1">
-            <label for="licensePlateCar">Placa: </label>
-            <input type="text" name="licensePlateCar" formControlName="licensePlateCar">
+            <label for="licensePlateCar">Placa:</label>
+            <input type="text" name="licensePlateCar" formControlName="licensePlateCar" autocomplete="off">
         </div>
         <div class="item-2">
-            <label for="brandCar">Marca: </label>
-            <input type="text" name="brandCar" formControlName="brandCar">
+            <label for="brandCar">Marca:</label>
+            <input type="text" name="brandCar" formControlName="brandCar" autocomplete="off">
         </div>
         <div class="item-3">
-            <label for="modelCar">Modelo: </label>
-            <input type="text" name="modelCar" formControlName="modelCar">
+            <label for="modelCar">Modelo:</label>
+            <input type="text" name="modelCar" formControlName="modelCar" autocomplete="off">
         </div>
         <div class="item-4">
-            <label for="">Cor: </label>
-            <input type="text" name="colorCar" formControlName="colorCar">
+            <label for="">Cor:</label>
+            <input type="text" name="colorCar" formControlName="colorCar" autocomplete="off">
         </div>
     </div>
-    <button type="submit" [disabled]="!parkingSpot.valid">Cadastrar</button>
+    <button id="add" type="submit" [disabled]="!parkingSpot.valid">Cadastrar</button>
 </form>
 <hr>
 
 <div>
+    <div>
+        <input type="text" name="search" id="search" placeholder="Procurar">
+        <select name="filter" id="filter">
+            <optgroup>
+                <option value="empty">Vagas Vazias</option>
+                <option value="occupied">Vagas Ocupadas</option>
+            </optgroup>
+        </select>
+        <select name="block" id="block">
+            <optgroup>
+                <option value="blockA">Bloco A</option>
+                <option value="blockB">Bloco B/option>
+            </optgroup>
+        </select>
+        <select name="order" id="order">
+            <optgroup>
+                <option value="asc">Ordem Crescente</option>
+                <option value="desc">Ordem Decrescente</option>
+            </optgroup>
+        </select>
+        <button>Procurar</button>
+    </div>
     <table>
         <thead>
             <tr>
