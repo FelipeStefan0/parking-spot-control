@@ -40,8 +40,11 @@ public class ParkingSpotService {
         return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
     }
 
-    public Page<ParkingSpotModel> findAll(Pageable pageable) {
+    /*public Page<ParkingSpotModel> findAll(Pageable pageable) {
         return parkingSpotRepository.findAll(pageable);
+    }*/
+    public List<ParkingSpotModel> findAll() {
+        return parkingSpotRepository.findAll();
     }
 
     public Optional<ParkingSpotModel> findById(UUID id) {
