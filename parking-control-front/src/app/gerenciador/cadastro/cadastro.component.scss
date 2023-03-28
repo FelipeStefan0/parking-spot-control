@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+@mixin inputStyle {
+  height: 2.8125rem;
+  margin-right: .625rem;
+  padding: 0 0.5625rem 0 0.5625rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.875rem;
+  border: 0.0625rem solid var(--light-gray);
+  border-radius: 0.3125rem;
+}
+
+@mixin animate($animation, $duration, $method, $time) {
+  animation: $animation $duration $method $time;
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content
+  }
+}
+
+form {
+  width: 80vw;
+  margin: 0 auto;
+  padding: 1.25rem;
+  label {
+    background-color: white;
+    color: #555555;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 600;
+    font-size: 0.875rem;
+    position: absolute;
+    margin: -0.5rem 0 0 0.75rem;
+    padding: 0 0.125rem 0 0.25rem;
+  }
+  input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    @include inputStyle;
+  }
+  input:focus {
+    outline: none;
+    border: 0.0625rem solid;
+    border-color: var(--blue-sky);
+  }
+  .grid {
+    &-1 {
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: repeat(3, 33%);
+    }
+    &-2 {
+      display: grid;
+      grid-template-columns: repeat(1, 100%);
+    }
+    &-3 {
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: repeat(4, 24.5%);
+    }
+    &-1,
+    &-2,
+    &-3 {
+      margin-bottom: 1.875rem;
+    }
+  }
+}
+
+div.button {
+  display: flex;
+  justify-content: center;
+  button#add {
+    position: relative;
+    background-color: var(--blue-sky);
+    color: white;
+    font-size: 1.125rem;
+    font-family: "Courier New", Courier, monospace;
+    width: 30%;
+    padding: 0.625rem;
+    border: none;
+    border-radius: 0.3125rem;
+    outline: none;
+    // transition-duration: 0.4s;
+    // overflow: hidden;
+    cursor: pointer;
+    &:active {
+      background-color: #3676c0;
+    }
+
+    // &:after {
+    //   content: "";
+    //   background: #6bb0ff;
+    //   display: block;
+    //   position: absolute;
+    //   padding-top: 150%;
+    //   padding-left: 120%;
+    //   margin-left: -1.25rem!important;
+    //   margin-top: -120%;
+    //   opacity: 0;
+    //   transition: 0.8s
+    // }
+    // &:active:after {
+    //   padding: 0;
+    //   margin: 0;
+    //   opacity: 1;
+    //   transition: 0s;
+    // }
+    
+  }
+
+  button#add:disabled {
+    background-color: var(--light-gray);
+    color: white;
+    font-size: 1.125rem;
+    font-family: "Courier New", Courier, monospace;
+    width: 30%;
+    padding: 0.625rem;
+    border: none;
+    border-radius: 0.3125rem;
+    // &:after {
+    //   transition: 0s
+    // }
+  }
+}
+
+hr {
+  background-color: var(--light-gray);
+  width: 80vw;
+  margin: 0 auto;
+  height: .0625rem;
+  border: none
+}
+
+.spot-content {
+  width: 80vw;
+  margin: 0 auto;
+  position: relative;
+  .search {
+    margin: 1.125rem 0 1.125rem 0;
+    input, select {
+      @include inputStyle;
+    } 
+    input:focus, select:focus {
+      outline: none;
+      border: 0.0625rem solid;
+      border-color: var(--blue-sky);
+    }
+    button {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      height: 2.8125rem;
+      padding: 0 4rem 0 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border: none;
+      border-radius: 0.3125rem;
+      cursor: pointer;
+      img {
+        margin-right: 10px;
+      }
+      &:active {
+        background-color: rgb(230, 230, 230);
+      }
+    }  
+  }
+  table {
+    width: 100%;
+  }
+}

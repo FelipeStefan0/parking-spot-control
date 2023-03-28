@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
-import { ParkingSpot } from '../models/parking-spot-model';
-import { ParkingSpotService } from '../services/parking-spot.service';
+import { ParkingSpot } from '../../models/parking-spot-model';
+import { ParkingSpotService } from '../../services/parking-spot.service';
 
 @Component({
   selector: 'app-cadastro',
