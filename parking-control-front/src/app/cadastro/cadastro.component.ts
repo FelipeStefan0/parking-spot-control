@@ -13,10 +13,13 @@ export class CadastroComponent {
   onceParkingSpot?: ParkingSpot;
   parkingSpots: ParkingSpot[] = [];
 
+  titles: String[] = [];
+
   constructor(private fb: FormBuilder, private ps: ParkingSpotService) {}
 
   ngOnInit() {
     this.getParkingSpots();
+    this.titles = this.ps.getTitltes();
   }
 
   //With FormBuilder

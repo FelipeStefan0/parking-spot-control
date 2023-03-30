@@ -1,3 +1,41 @@
-input {
-    display: block;
+$grid-gutter: 1%;
+$grid-columns: 3;
+$grid-max: 100%;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    padding: 1.25rem;
+}
+
+.grid {
+    &-1 {
+        padding: 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        input {
+            width: 100%;
+        }
+    }
+    &-2 {
+        padding: 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        input {
+            width: 100%;
+        }
+    }
+}
+
+table {
+    padding: 1.25rem;
+}
+
+button {
+    width: 100%;
+    margin: 1.25rem 1.25rem 1.25rem 0;
+    padding: .625rem;
 }

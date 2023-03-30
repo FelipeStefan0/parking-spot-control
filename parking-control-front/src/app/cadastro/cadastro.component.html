@@ -1,47 +1,55 @@
 <form [formGroup]="parkingSpot" (ngSubmit)="onSubmit()">
-    <label for="parkingSpotNumber">Vaga: </label>
-    <input type="text" id="parkingSpotNumber" formControlName="parkingSpotNumber">
-
-    <label for="licensePlateCar">Placa: </label>
-    <input type="text" name="licensePlateCar" formControlName="licensePlateCar">
-
-    <label for="brandCar">Marca: </label>
-    <input type="text" name="brandCar" formControlName="brandCar">
-
-    <label for="modelCar">Modelo: </label>
-    <input type="text" name="modelCar" formControlName="modelCar">
-
-    <label for="">Cor: </label>
-    <input type="text" name="colorCar" formControlName="colorCar">
-
-    <label for="">Nome do Responsável</label>
-    <input type="text" name="responsibleName" formControlName="responsibleName">
-
-    <label for="apartment">Apartamento</label>
-    <input type="text" name="apartment" formControlName="apartment">
-
-    <label for="block">Bloco</label>
-    <input type="text" name="block" formControlName="block">
-    
+    <div class="grid-1">
+        <div class="item-1">
+            <label for="parkingSpotNumber">Vaga: </label>
+            <input type="text" id="parkingSpotNumber" formControlName="parkingSpotNumber">
+        </div>
+        <div class="item-2">
+            <label for="apartment">Apartamento: </label>
+            <input type="text" name="apartment" formControlName="apartment">
+        </div>
+        <div class="item-3">
+            <label for="block">Bloco: </label>
+            <input type="text" name="block" formControlName="block">
+        </div>
+        <div class="item-4">
+            <label for="">Nome do Responsável: </label>
+            <input type="text" name="responsibleName" formControlName="responsibleName">
+        </div>
+    </div>
+    <div class="grid-2">
+        <div class="item-1">
+            <label for="licensePlateCar">Placa: </label>
+            <input type="text" name="licensePlateCar" formControlName="licensePlateCar">
+        </div>
+        <div class="item-2">
+            <label for="brandCar">Marca: </label>
+            <input type="text" name="brandCar" formControlName="brandCar">
+        </div>
+        <div class="item-3">
+            <label for="modelCar">Modelo: </label>
+            <input type="text" name="modelCar" formControlName="modelCar">
+        </div>
+        <div class="item-4">
+            <label for="">Cor: </label>
+            <input type="text" name="colorCar" formControlName="colorCar">
+        </div>
+    </div>
     <button type="submit" [disabled]="!parkingSpot.valid">Cadastrar</button>
 </form>
 <hr>
+
 <div>
     <table>
         <thead>
-            <td></td>
-            <td>Vaga</td>
-            <td>Placa</td>
-            <td>Marca</td>
-            <td>Modelo</td>
-            <td>Cor</td>
-            <td>Nome do Responsável</td>
-            <td>Apartamento</td>
-            <td>Bloco</td>
+            <tr>
+                <td>#</td>
+                <td *ngFor="let title of titles">{{title}}</td>
+            </tr>
         </thead>
         <tbody>
             <tr *ngFor="let spot of parkingSpots; let i = index">
-                <td></td>
+                <td>{{i+1}}</td>
                 <td>{{spot.parkingSpotNumber}}</td>
                 <td>{{spot.licensePlateCar}}</td>
                 <td>{{spot.brandCar}}</td>
