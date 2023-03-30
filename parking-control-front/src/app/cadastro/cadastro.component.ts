@@ -64,4 +64,5 @@ export class CadastroComponent {
   getParkingSpots() {
     this.ps.getParkingSpots().subscribe(spot => this.parkingSpots = spot);
   }
+
 }
