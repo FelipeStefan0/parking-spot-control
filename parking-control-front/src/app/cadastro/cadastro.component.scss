@@ -4,19 +4,28 @@
 }
 
 form {
+    margin: 0 auto;
     padding: 1.25rem;
-}
-
-.grid {
-    &-1 {
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
+    input {
+        display: block;
+        width: 100%;
+        padding: 5px;
+        border: 1px solid gray;
+        border-radius: 5px;
     }
-    &-2 {
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
+    .grid {
+        &-1 {
+            display: grid;
+            grid-template-columns: repeat(3, 33.3%);
+        }
+        &-2 {
+            display: grid;
+            grid-template-columns: repeat(1, 100%);
+        }
+        &-3 {
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+        }
     }
 }
 
