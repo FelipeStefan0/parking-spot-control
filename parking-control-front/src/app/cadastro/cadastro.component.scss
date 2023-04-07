@@ -18,11 +18,13 @@ form {
     input {
         display: block;
         width: 100%;
-        padding: 9px 0 9px 9px;
+        padding: 9px 0 9px 0;
+        padding-left: 9px;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 14px;
         border: 1px solid gray;
         border-radius: 5px;
+        box-sizing: border-box;
     }
     input:focus {
         outline: 1px solid;
