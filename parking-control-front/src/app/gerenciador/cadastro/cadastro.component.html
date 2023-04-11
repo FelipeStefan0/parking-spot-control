@@ -8,7 +8,6 @@
         formControlName="parkingSpotNumber"
         autocomplete="off"
       />
-      <div *ngIf=""></div>
     </div>
     <div class="item-2">
       <label for="apartment">Apartamento:</label>
@@ -89,7 +88,7 @@
 
 <div class="spot-content">
   <div class="search">
-    <input type="text" name="search" id="search" placeholder="Procurar" />
+    <input type="text" name="search" id="search" placeholder="Procurar" autocomplete="off"/>
     <select name="filter" id="filter">
       <option value="empty">Vagas Vazias</option>
       <option value="occupied">Vagas Ocupadas</option>
@@ -104,11 +103,12 @@
     </select>
     <button><img src="assets/icons/search.svg" alt="search-icon">Procurar</button>
   </div>
-  <table>
+  <table *ngIf="parkingSpots.length > 0">
     <thead>
       <tr>
         <td>#</td>
         <td *ngFor="let title of titles">{{ title }}</td>
+        <td></td>
       </tr>
     </thead>
     <tbody>
@@ -122,6 +122,10 @@
         <td>{{ spot.responsibleName }}</td>
         <td>{{ spot.apartment }}</td>
         <td>{{ spot.block }}</td>
+        <td>
+          <button id="update">Editar</button>
+          <button id="delete">Excluir</button>
+        </td>
       </tr>
     </tbody>
   </table>
