@@ -65,4 +65,8 @@ export class CadastroComponent {
     this.ps.getParkingSpots().subscribe(spot => this.parkingSpots = spot);
   }
 
+  deleteParkingSpot(parkingSpot: ParkingSpot) {
+    this.ps.deleteParkingSpot(parkingSpot).subscribe(parkingSpot => this.parkingSpots.splice(this.parkingSpots.indexOf(parkingSpot), 1));
+  }
+
 }
