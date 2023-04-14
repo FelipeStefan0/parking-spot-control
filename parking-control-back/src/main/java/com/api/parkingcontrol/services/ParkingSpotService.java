@@ -32,6 +32,10 @@ public class ParkingSpotService {
         return parkingSpotRepository.existsByLicensePlateCar(licensePlateCar);
     }
 
+    public Optional<ParkingSpotModel> findByLincensePlateCar(String licensePlateCar) {
+        return Optional.ofNullable(parkingSpotRepository.findByLicensePlateCar(licensePlateCar));
+    }
+
     public boolean existByParkingSpotNumber(String parkingSpotNumber) {
         return parkingSpotRepository.existsByParkingSpotNumber(parkingSpotNumber);
     }

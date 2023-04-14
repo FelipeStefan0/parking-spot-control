@@ -65,8 +65,9 @@ export class CadastroComponent {
     this.ps.getParkingSpots().subscribe(spot => this.parkingSpots = spot);
   }
 
-  deleteParkingSpot(parkingSpot: ParkingSpot) {
-    this.ps.deleteParkingSpot(parkingSpot).subscribe(parkingSpot => this.parkingSpots.splice(this.parkingSpots.indexOf(parkingSpot), 1));
+  deleteParkingSpot(licensePlateCar: String, parkingSpotExcluded: ParkingSpot) {
+    this.ps.deleteParkingSpot(licensePlateCar).subscribe(parkingSpotExcluded => this.parkingSpots.splice(this.parkingSpots.indexOf(parkingSpotExcluded), 1));
+    console.log('Excluded but not splice of list')
   }
 
 }

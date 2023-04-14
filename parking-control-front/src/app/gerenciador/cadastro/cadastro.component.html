@@ -118,13 +118,12 @@
         <td>{{ spot.licensePlateCar }}</td>
         <td>{{ spot.brandCar }}</td>
         <td>{{ spot.modelCar }}</td>
-        <td>{{ spot.colorCar }}</td>
         <td>{{ spot.responsibleName }}</td>
         <td>{{ spot.apartment }}</td>
         <td>{{ spot.block }}</td>
         <td>
           <button id="update">Editar</button>
-          <button id="delete" (click)="deleteParkingSpot(spot)">Excluir</button>
+          <button id="delete" (click)="deleteParkingSpot(spot.licensePlateCar, spot)">Excluir</button>
         </td>
       </tr>
     </tbody>

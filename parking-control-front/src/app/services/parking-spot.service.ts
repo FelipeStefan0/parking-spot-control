@@ -14,7 +14,7 @@ export class ParkingSpotService {
   private parkingSpotUrl: string = 'http://localhost:8080/api/parking-spot';
 
   httpOptions = {
-    headers: new Headers({'Content-type': 'application/json'})
+    headers: {'Content-type': 'application/json'}
   }
 
   private titles: string[] = titles.titles;
@@ -33,8 +33,7 @@ export class ParkingSpotService {
     return this.http.post<ParkingSpot>(this.parkingSpotUrl, parkingSpot);
   }
 
-  deleteParkingSpot(parkingSpot: ParkingSpot): Observable<ParkingSpot>{
-    const url = `${this.parkingSpotUrl}/${parkingSpot}`;
-    return this.http.delete<ParkingSpot>(url);
+  deleteParkingSpot(licensePlateCar: String): Observable<ParkingSpot>{
+    return this.http.delete<ParkingSpot>(`${this.parkingSpotUrl}/${licensePlateCar}`);
   }
 }

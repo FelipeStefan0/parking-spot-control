@@ -59,18 +59,18 @@ public class ParkingSpotController {
         return parkingSpotService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value="id") UUID id){
-        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
+    @GetMapping("/{plateCar}")
+    public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value="plateCar") String plateCar){
+        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findByLincensePlateCar(plateCar);
         if(!parkingSpotModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotModelOptional.get());
     }
 
-    @DeleteMapping("/{parkingSpot}")
-    public ResponseEntity<Object> deleteParkingSpot(@PathVariable(value = "parkingSpot") ParkingSpotModel parkingSpot){
-        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(parkingSpot.getId());
+    @DeleteMapping("/{licensePlateCar}")
+    public ResponseEntity<Object> deleteParkingSpot(@PathVariable(value = "licensePlateCar") String licensePlateCar){
+        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findByLincensePlateCar(licensePlateCar);
         if(!parkingSpotModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot not found");
         }
