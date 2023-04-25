@@ -33,7 +33,7 @@ export class ParkingSpotService {
     return this.http.post<ParkingSpot>(this.parkingSpotUrl, parkingSpot);
   }
 
-  deleteParkingSpot(licensePlateCar: String): Observable<ParkingSpot>{
-    return this.http.delete<ParkingSpot>(`${this.parkingSpotUrl}/${licensePlateCar}`);
+  deleteParkingSpot(id: string): Observable<ParkingSpot>{
+    return this.http.delete<ParkingSpot>(`${this.parkingSpotUrl}/${JSON.stringify(id)}`);
   }
 }

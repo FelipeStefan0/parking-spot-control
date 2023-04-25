@@ -81,6 +81,9 @@
     <button id="add" type="submit" [disabled]="!parkingSpot.valid">
       Cadastrar
     </button>
+    <button id="clean" type="button">
+      Limpar
+    </button>
   </div>
 </form>
 
@@ -103,29 +106,36 @@
     </select>
     <button><img src="assets/icons/search.svg" alt="search-icon">Procurar</button>
   </div>
-  <table *ngIf="parkingSpots.length > 0">
-    <thead>
-      <tr>
-        <td>#</td>
-        <td *ngFor="let title of titles">{{ title }}</td>
-        <td></td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let spot of parkingSpots; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ spot.parkingSpotNumber }}</td>
-        <td>{{ spot.licensePlateCar }}</td>
-        <td>{{ spot.brandCar }}</td>
-        <td>{{ spot.modelCar }}</td>
-        <td>{{ spot.responsibleName }}</td>
-        <td>{{ spot.apartment }}</td>
-        <td>{{ spot.block }}</td>
-        <td>
-          <button id="update">Editar</button>
-          <button id="delete" (click)="deleteParkingSpot(spot.licensePlateCar, spot)">Excluir</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <ng-container *ngIf="parkingSpots.length > 0; else noData">
+    <table>
+      <thead>
+        <tr>
+          <td>#</td>
+          <td *ngFor="let title of titles">{{ title }}</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let spot of parkingSpots; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ spot.parkingSpotNumber }}</td>
+          <td>{{ spot.licensePlateCar }}</td>
+          <td>{{ spot.brandCar }}</td>
+          <td>{{ spot.modelCar }}</td>
+          <td>{{ spot.responsibleName }}</td>
+          <td>{{ spot.apartment }}</td>
+          <td>{{ spot.block }}</td>
+          <td>
+            <button id="update">Editar</button>
+            <!-- <button id="delete" (click)="deleteParkingSpot()">Excluir</button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #noData>
+    <div class="no-data-message">
+      <h2>No data found...</h2>
+    </div>
+  </ng-template> 
 </div>
