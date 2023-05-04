@@ -10,7 +10,7 @@ import { ParkingSpotService } from '../../services/parking-spot.service';
 })
 export class CadastroComponent {
 
-  onceParkingSpot?: ParkingSpot;
+  entityParkingSpot?: ParkingSpot;
   parkingSpots: ParkingSpot[] = [];
 
   titles: String[] = [];
@@ -22,8 +22,12 @@ export class CadastroComponent {
     this.titles = this.ps.getTitltes();
   }
 
+  clean() {
+    this.formParkingSpot.reset();
+  }
+
   //With FormBuilder
-  parkingSpot = this.fb.group({
+  formParkingSpot = this.fb.group({
     parkingSpotNumber: ['', Validators.required],
     licensePlateCar: ['', Validators.required],
     brandCar: ['', Validators.required],
@@ -47,26 +51,27 @@ export class CadastroComponent {
   })*/
 
   onSubmit() {
-    this.onceParkingSpot = {
-      parkingSpotNumber: this.parkingSpot.value.parkingSpotNumber as string,
-      licensePlateCar: this.parkingSpot.value.licensePlateCar as string,
-      brandCar: this.parkingSpot.value.brandCar as string,
-      modelCar: this.parkingSpot.value.modelCar as string,
-      colorCar: this.parkingSpot.value.colorCar as string,
-      responsibleName: this.parkingSpot.value.responsibleName as string,
-      apartment: this.parkingSpot.value.apartment as string,
-      block: this.parkingSpot.value.block as string
+    this.entityParkingSpot = {
+      parkingSpotNumber: this.formParkingSpot.value.parkingSpotNumber as string,
+      licensePlateCar: this.formParkingSpot.value.licensePlateCar as string,
+      brandCar: this.formParkingSpot.value.brandCar as string,
+      modelCar: this.formParkingSpot.value.modelCar as string,
+      colorCar: this.formParkingSpot.value.colorCar as string,
+      responsibleName: this.formParkingSpot.value.responsibleName as string,
+      apartment: this.formParkingSpot.value.apartment as string,
+      block: this.formParkingSpot.value.block as string
     };
 
-    this.ps.createParkingSpot(this.onceParkingSpot).subscribe(parkingSpot => this.parkingSpots.push(parkingSpot));
+    this.ps.createParkingSpot(this.entityParkingSpot).subscribe(parkingSpot => this.parkingSpots.push(parkingSpot));
   }
 
   getParkingSpots() {
     this.ps.getParkingSpots().subscribe(spot => this.parkingSpots = spot);
   }
 
-  deleteParkingSpot(id: string) {
-    this.ps.deleteParkingSpot(id).subscribe();
+  deleteParkingSpot(parkingSpot: ParkingSpot) {
+    this.ps.deleteParkingSpot(parkingSpot).subscribe();
+    this.parkingSpots = this.parkingSpots.filter((spot) => spot !== parkingSpot)
   }
 
 }

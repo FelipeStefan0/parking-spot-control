@@ -22,18 +22,17 @@ public class ParkingSpotService {
         this.parkingSpotRepository = parkingSpotRepository;
     }
 
-
     @Transactional
     public ParkingSpotModel save(ParkingSpotModel parkingSpotModel) {
         return parkingSpotRepository.save(parkingSpotModel);
     }
 
-    public boolean existsByLicensePlateCar(String licensePlateCar) {
-        return parkingSpotRepository.existsByLicensePlateCar(licensePlateCar);
+    public boolean existsByLicensePlateCar(String plateCar) {
+        return parkingSpotRepository.existsByLicensePlateCar(plateCar);
     }
 
-    public Optional<ParkingSpotModel> findByLincensePlateCar(String licensePlateCar) {
-        return Optional.ofNullable(parkingSpotRepository.findByLicensePlateCar(licensePlateCar));
+    public Optional<ParkingSpotModel> findByLicensePlateCar(String plateCar) {
+        return Optional.ofNullable(parkingSpotRepository.findByLicensePlateCar(plateCar));
     }
 
     public boolean existByParkingSpotNumber(String parkingSpotNumber) {
