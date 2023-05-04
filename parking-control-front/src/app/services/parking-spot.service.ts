@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ParkingSpot } from '../models/parking-spot-model';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 import titles from '../../assets/titles.json'
@@ -12,10 +12,6 @@ import titles from '../../assets/titles.json'
 export class ParkingSpotService {
 
   private parkingSpotUrl: string = 'http://localhost:8080/api/parking-spot';
-
-  httpOptions = {
-    headers: {'Content-type': 'application/json'}
-  }
 
   private titles: string[] = titles.titles;
 
@@ -33,7 +29,7 @@ export class ParkingSpotService {
     return this.http.post<ParkingSpot>(this.parkingSpotUrl, parkingSpot);
   }
 
-  deleteParkingSpot(id: string): Observable<ParkingSpot>{
-    return this.http.delete<ParkingSpot>(`${this.parkingSpotUrl}/${JSON.stringify(id)}`);
+  deleteParkingSpot(parkingSpot: ParkingSpot): Observable<ParkingSpot>{
+    return this.http.delete<ParkingSpot>(`${this.parkingSpotUrl}/${parkingSpot.licensePlateCar}`);
   }
 }

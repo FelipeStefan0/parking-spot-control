@@ -1,4 +1,4 @@
-<form [formGroup]="parkingSpot" (ngSubmit)="onSubmit()">
+<form [formGroup]="formParkingSpot" (ngSubmit)="onSubmit()">
   <div class="grid-1">
     <div class="item-1">
       <label for="parkingSpotNumber">Vaga:</label>
@@ -78,12 +78,8 @@
     </div>
   </div>
   <div class="button">
-    <button id="add" type="submit" [disabled]="!parkingSpot.valid">
-      Cadastrar
-    </button>
-    <button id="clean" type="button">
-      Limpar
-    </button>
+    <button id="add" type="submit" [disabled]="!formParkingSpot.valid">Cadastrar</button>
+    <button id="clean" type="button" (click)="clean()">Limpar</button>
   </div>
 </form>
 
@@ -127,7 +123,7 @@
           <td>{{ spot.block }}</td>
           <td>
             <button id="update">Editar</button>
-            <!-- <button id="delete" (click)="deleteParkingSpot()">Excluir</button> -->
+            <button id="delete" (click)="deleteParkingSpot(spot)">Excluir</button>
           </td>
         </tr>
       </tbody>

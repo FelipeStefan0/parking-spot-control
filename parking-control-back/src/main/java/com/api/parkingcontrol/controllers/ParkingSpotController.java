@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -61,21 +62,24 @@ public class ParkingSpotController {
 
     @GetMapping("/{plateCar}")
     public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value="plateCar") String plateCar){
-        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findByLincensePlateCar(plateCar);
+        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findByLicensePlateCar(plateCar);
         if(!parkingSpotModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotModelOptional.get());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteParkingSpot(@PathVariable(value = "id") UUID id){
-        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
+    @DeleteMapping("/{plateCar}")
+    public ResponseEntity<Object> deleteParkingSpot(@PathVariable(value = "plateCar") String plateCar){
+        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findByLicensePlateCar(plateCar);
+        HashMap<String,String> response = new HashMap<>();
         if(!parkingSpotModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot not found");
+            response.put("message", "Parking Spot not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
         parkingSpotService.delete(parkingSpotModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Parking Spot deleted successfully.");
+        response.put("message", "Parking Spot deleted successfully.");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/{id}")
