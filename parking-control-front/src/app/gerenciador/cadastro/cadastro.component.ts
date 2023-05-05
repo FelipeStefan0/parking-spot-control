@@ -26,7 +26,6 @@ export class CadastroComponent {
     this.formParkingSpot.reset();
   }
 
-  //With FormBuilder
   formParkingSpot = this.fb.group({
     parkingSpotNumber: ['', Validators.required],
     licensePlateCar: ['', Validators.required],
@@ -37,18 +36,6 @@ export class CadastroComponent {
     apartment: ['', Validators.required],
     block: ['', Validators.required],
   })
-
-  /* Without FormBuilder
-  parkingSpot = new FormGroup({
-    parkingSpotNumber: new FormControl(''),
-    licensePlateCar: new FormControl(''),
-    brandCar: new FormControl(''),
-    modelCar: new FormControl(''),
-    colorCar: new FormControl(''),
-    responsibleName: new FormControl(''),
-    apartment: new FormControl(''),
-    block: new FormControl(''),
-  })*/
 
   onSubmit() {
     this.entityParkingSpot = {
