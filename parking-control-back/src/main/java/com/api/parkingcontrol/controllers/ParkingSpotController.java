@@ -82,10 +82,10 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "id") UUID id,
+    @PutMapping("/{plateCar}")
+    public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "plateCar") String plateCar,
                                                     @RequestBody @Valid ParkingSpotDtos parkingSpotDto){
-        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
+        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findByLicensePlateCar(plateCar);
         if(!parkingSpotModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot not found");
         }
