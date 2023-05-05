@@ -22,11 +22,14 @@
   }
 }
 
-form {
+.container {
   width: 80vw;
   margin: 0 auto;
   margin-top: 50px;
   padding: 1.25rem;
+}
+
+form {
   label {
     background-color: white;
     color: #555555;
