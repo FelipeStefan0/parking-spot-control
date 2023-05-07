@@ -12,14 +12,9 @@
   border-radius: 0.3125rem;
 }
 
-@mixin animate($animation, $duration, $method, $time) {
-  animation: $animation $duration $method $time;
-}
-
-@mixin keyframes($name) {
-  @keyframes #{$name} {
-    @content;
-  }
+//Trocar cor da linha da vaga selecionada
+@mixin selected($name){
+  
 }
 
 .container {
@@ -195,6 +190,7 @@ hr {
             }
             &:active:after {
               background-color: rgba(0, 0, 0, 0.137);
+              @include selected(selected);
             }
           }
         }

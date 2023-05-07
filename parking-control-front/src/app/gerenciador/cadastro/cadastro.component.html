@@ -79,10 +79,8 @@
       </div>
     </div>
     <div class="button">
-      <button id="add" type="submit" [disabled]="!formParkingSpot.valid">
-        Cadastrar
-      </button>
-      <button id="clean" type="button" (click)="clean()">Limpar</button>
+      <button id="add" type="submit" [disabled]="!formParkingSpot.valid">{{ edit ? "Editar" : "Cadastrar"}}</button>
+      <button id="clean" type="button" (click)="formInit()">Limpar</button>
     </div>
   </form>
   <div>
@@ -133,10 +131,8 @@
               <td>{{ spot.apartment }}</td>
               <td>{{ spot.block }}</td>
               <td>
-                <button id="update">Editar</button>
-                <button id="delete" (click)="deleteParkingSpot(spot)">
-                  Excluir
-                </button>
+                <button id="update" (click)="updateParkingSpot(spot, i)">Editar</button>
+                <button id="delete" (click)="deleteParkingSpot(spot)">Excluir</button>
               </td>
             </tr>
           </tbody>
