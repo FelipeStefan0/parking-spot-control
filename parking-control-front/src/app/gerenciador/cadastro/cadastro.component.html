@@ -111,6 +111,15 @@
           <img src="assets/icons/search.svg" alt="search-icon" />Procurar
         </button>
       </div>
+      <ng-container *ngIf="loading">
+        <div class="loading">
+          <mat-progress-spinner
+            [color]="color"
+            [mode]="mode"
+            [diameter]="50">  
+          </mat-progress-spinner>
+        </div>
+      </ng-container>
       <ng-container *ngIf="parkingSpots.length > 0; else noData">
         <table>
           <thead>

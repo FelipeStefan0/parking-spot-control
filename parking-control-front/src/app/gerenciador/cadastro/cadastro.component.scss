@@ -197,6 +197,11 @@ hr {
       }
     }
   }
+  .loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   .no-data-message {
     width: 100%;
     text-align: center;

@@ -2,13 +2,22 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
+import { tap } from 'rxjs';
+
+import {ThemePalette} from '@angular/material/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss']
+  styleUrls: ['./cadastro.component.scss'],
 })
 export class CadastroComponent {
+
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+
+  loading !: boolean;
 
   entityParkingSpot!: ParkingSpot;
   parkingSpots: ParkingSpot[] = [];
@@ -43,17 +52,7 @@ export class CadastroComponent {
   }
 
   onSubmit() {
-    this.entityParkingSpot = {
-      parkingSpotNumber: this.formParkingSpot.value.parkingSpotNumber as string,
-      licensePlateCar: this.formParkingSpot.value.licensePlateCar as string,
-      brandCar: this.formParkingSpot.value.brandCar as string,
-      modelCar: this.formParkingSpot.value.modelCar as string,
-      colorCar: this.formParkingSpot.value.colorCar as string,
-      responsibleName: this.formParkingSpot.value.responsibleName as string,
-      apartment: this.formParkingSpot.value.apartment as string,
-      block: this.formParkingSpot.value.block as string
-    };
-
+    this.entityParkingSpot = this.formParkingSpot.value;
     if(this.edit) {
       this.ps.updateParkingSpot(this.entityParkingSpot).subscribe((parkingSpot) => this.parkingSpots[this.indexEdit] = parkingSpot);
     } else {
@@ -65,7 +64,13 @@ export class CadastroComponent {
   }
 
   getParkingSpots() {
-    this.ps.getParkingSpots().subscribe(spot => this.parkingSpots = spot);
+    this.ps.getParkingSpots()
+    .pipe(
+      tap(() => this.loading = true))
+    .subscribe((spot) => { 
+      this.parkingSpots = spot,
+      this.loading = false
+    });
   }
 
   updateParkingSpot(parkingSpot: ParkingSpot, index: number) {
