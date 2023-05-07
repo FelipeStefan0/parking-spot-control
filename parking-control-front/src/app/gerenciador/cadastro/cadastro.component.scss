@@ -12,21 +12,19 @@
   border-radius: 0.3125rem;
 }
 
-@mixin animate($animation, $duration, $method, $time) {
-  animation: $animation $duration $method $time;
+//Trocar cor da linha da vaga selecionada
+@mixin selected($name){
+  
 }
 
-@mixin keyframes($name) {
-  @keyframes #{$name} {
-    @content;
-  }
-}
-
-form {
+.container {
   width: 80vw;
   margin: 0 auto;
   margin-top: 50px;
   padding: 1.25rem;
+}
+
+form {
   label {
     background-color: white;
     color: #555555;
@@ -89,27 +87,6 @@ div.button {
       transition: 0.2s;
     }
   }
-  // button#add {
-    // transition-duration: 0.4s;
-    // overflow: hidden;
-    // &:after {
-    //   content: "";
-    //   background: #6bb0ff;
-    //   display: block;
-    //   position: absolute;
-    //   padding-top: 150%;
-    //   padding-left: 120%;
-    //   margin-left: -1.25rem!important;
-    //   margin-top: -120%;
-    //   opacity: 0;
-    //   transition: 0.8s
-    // }
-    // &:active:after {
-    //   padding: 0;
-    //   margin: 0;
-    //   opacity: 1;
-    //   transition: 0s;
-    // }
   button#add:disabled {
     background-color: var(--light-gray);
     color: white;
@@ -118,9 +95,6 @@ div.button {
     padding: 0.625rem;
     border: none;
     border-radius: 0.3125rem;
-    // &:after {
-    //   transition: 0s
-    // }
   }
 }
 
@@ -216,11 +190,17 @@ hr {
             }
             &:active:after {
               background-color: rgba(0, 0, 0, 0.137);
+              @include selected(selected);
             }
           }
         }
       }
     }
+  }
+  .loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   .no-data-message {
     width: 100%;

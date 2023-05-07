@@ -1,72 +1,82 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
+import { tap } from 'rxjs';
+
+import {ThemePalette} from '@angular/material/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss']
+  styleUrls: ['./cadastro.component.scss'],
 })
 export class CadastroComponent {
 
-  entityParkingSpot?: ParkingSpot;
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+
+  loading !: boolean;
+
+  entityParkingSpot!: ParkingSpot;
   parkingSpots: ParkingSpot[] = [];
 
+  formParkingSpot!: FormGroup;
+
   titles: String[] = [];
+
+  edit: boolean = false;
+  indexEdit!: number;
 
   constructor(private fb: FormBuilder, private ps: ParkingSpotService) {}
 
   ngOnInit() {
+    this.formInit();
     this.getParkingSpots();
     this.titles = this.ps.getTitltes();
   }
 
-  clean() {
-    this.formParkingSpot.reset();
+  formInit() {
+    this.formParkingSpot = this.fb.group({
+      parkingSpotNumber: ['', Validators.required],
+      licensePlateCar: ['', Validators.required],
+      brandCar: ['', Validators.required],
+      modelCar: ['', Validators.required],
+      colorCar: ['', Validators.required],
+      responsibleName: ['', Validators.required],
+      apartment: ['', Validators.required],
+      block: ['', Validators.required],
+    })
+    this.edit = false;
   }
 
-  //With FormBuilder
-  formParkingSpot = this.fb.group({
-    parkingSpotNumber: ['', Validators.required],
-    licensePlateCar: ['', Validators.required],
-    brandCar: ['', Validators.required],
-    modelCar: ['', Validators.required],
-    colorCar: ['', Validators.required],
-    responsibleName: ['', Validators.required],
-    apartment: ['', Validators.required],
-    block: ['', Validators.required],
-  })
-
-  /* Without FormBuilder
-  parkingSpot = new FormGroup({
-    parkingSpotNumber: new FormControl(''),
-    licensePlateCar: new FormControl(''),
-    brandCar: new FormControl(''),
-    modelCar: new FormControl(''),
-    colorCar: new FormControl(''),
-    responsibleName: new FormControl(''),
-    apartment: new FormControl(''),
-    block: new FormControl(''),
-  })*/
-
   onSubmit() {
-    this.entityParkingSpot = {
-      parkingSpotNumber: this.formParkingSpot.value.parkingSpotNumber as string,
-      licensePlateCar: this.formParkingSpot.value.licensePlateCar as string,
-      brandCar: this.formParkingSpot.value.brandCar as string,
-      modelCar: this.formParkingSpot.value.modelCar as string,
-      colorCar: this.formParkingSpot.value.colorCar as string,
-      responsibleName: this.formParkingSpot.value.responsibleName as string,
-      apartment: this.formParkingSpot.value.apartment as string,
-      block: this.formParkingSpot.value.block as string
-    };
+    this.entityParkingSpot = this.formParkingSpot.value;
+    if(this.edit) {
+      this.ps.updateParkingSpot(this.entityParkingSpot).subscribe((parkingSpot) => this.parkingSpots[this.indexEdit] = parkingSpot);
+    } else {
+      this.ps.createParkingSpot(this.entityParkingSpot).subscribe(parkingSpot => this.parkingSpots.push(parkingSpot));
+    }
 
-    this.ps.createParkingSpot(this.entityParkingSpot).subscribe(parkingSpot => this.parkingSpots.push(parkingSpot));
+    this.formInit();
+    this.edit = false;
   }
 
   getParkingSpots() {
-    this.ps.getParkingSpots().subscribe(spot => this.parkingSpots = spot);
+    this.ps.getParkingSpots()
+    .pipe(
+      tap(() => this.loading = true))
+    .subscribe((spot) => { 
+      this.parkingSpots = spot,
+      this.loading = false
+    });
+  }
+
+  updateParkingSpot(parkingSpot: ParkingSpot, index: number) {
+    this.formParkingSpot?.patchValue(parkingSpot);
+    this.indexEdit = index;
+    this.edit = true;
   }
 
   deleteParkingSpot(parkingSpot: ParkingSpot) {

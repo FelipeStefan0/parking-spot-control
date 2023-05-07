@@ -1,137 +1,157 @@
-<form [formGroup]="formParkingSpot" (ngSubmit)="onSubmit()">
-  <div class="grid-1">
-    <div class="item-1">
-      <label for="parkingSpotNumber">Vaga:</label>
-      <input
-        type="text"
-        id="parkingSpotNumber"
-        formControlName="parkingSpotNumber"
-        autocomplete="off"
-      />
+<div class="container">
+  <form [formGroup]="formParkingSpot" (ngSubmit)="onSubmit()">
+    <div class="grid-1">
+      <div class="item-1">
+        <label for="parkingSpotNumber">Vaga:</label>
+        <input
+          type="text"
+          id="parkingSpotNumber"
+          formControlName="parkingSpotNumber"
+          autocomplete="off"
+        />
+      </div>
+      <div class="item-2">
+        <label for="apartment">Apartamento:</label>
+        <input
+          type="text"
+          name="apartment"
+          formControlName="apartment"
+          autocomplete="off"
+        />
+      </div>
+      <div class="item-3">
+        <label for="block">Bloco: </label>
+        <input
+          type="text"
+          name="block"
+          formControlName="block"
+          autocomplete="off"
+        />
+      </div>
     </div>
-    <div class="item-2">
-      <label for="apartment">Apartamento:</label>
-      <input
-        type="text"
-        name="apartment"
-        formControlName="apartment"
-        autocomplete="off"
-      />
+    <div class="grid-2">
+      <div class="item-1">
+        <label for="responsibleName">Nome do Responsável:</label>
+        <input
+          type="text"
+          name="responsibleName"
+          formControlName="responsibleName"
+          autocomplete="off"
+        />
+      </div>
     </div>
-    <div class="item-3">
-      <label for="block">Bloco: </label>
-      <input
-        type="text"
-        name="block"
-        formControlName="block"
-        autocomplete="off"
-      />
+    <div class="grid-3">
+      <div class="item-1">
+        <label for="licensePlateCar">Placa:</label>
+        <input
+          type="text"
+          name="licensePlateCar"
+          formControlName="licensePlateCar"
+          autocomplete="off"
+        />
+      </div>
+      <div class="item-2">
+        <label for="brandCar">Marca:</label>
+        <input
+          type="text"
+          name="brandCar"
+          formControlName="brandCar"
+          autocomplete="off"
+        />
+      </div>
+      <div class="item-3">
+        <label for="modelCar">Modelo:</label>
+        <input
+          type="text"
+          name="modelCar"
+          formControlName="modelCar"
+          autocomplete="off"
+        />
+      </div>
+      <div class="item-4">
+        <label for="">Cor:</label>
+        <input
+          type="text"
+          name="colorCar"
+          formControlName="colorCar"
+          autocomplete="off"
+        />
+      </div>
     </div>
-  </div>
-  <div class="grid-2">
-    <div class="item-1">
-      <label for="responsibleName">Nome do Responsável:</label>
-      <input
-        type="text"
-        name="responsibleName"
-        formControlName="responsibleName"
-        autocomplete="off"
-      />
+    <div class="button">
+      <button id="add" type="submit" [disabled]="!formParkingSpot.valid">{{ edit ? "Editar" : "Cadastrar"}}</button>
+      <button id="clean" type="button" (click)="formInit()">Limpar</button>
     </div>
-  </div>
-  <div class="grid-3">
-    <div class="item-1">
-      <label for="licensePlateCar">Placa:</label>
-      <input
-        type="text"
-        name="licensePlateCar"
-        formControlName="licensePlateCar"
-        autocomplete="off"
-      />
-    </div>
-    <div class="item-2">
-      <label for="brandCar">Marca:</label>
-      <input
-        type="text"
-        name="brandCar"
-        formControlName="brandCar"
-        autocomplete="off"
-      />
-    </div>
-    <div class="item-3">
-      <label for="modelCar">Modelo:</label>
-      <input
-        type="text"
-        name="modelCar"
-        formControlName="modelCar"
-        autocomplete="off"
-      />
-    </div>
-    <div class="item-4">
-      <label for="">Cor:</label>
-      <input
-        type="text"
-        name="colorCar"
-        formControlName="colorCar"
-        autocomplete="off"
-      />
-    </div>
-  </div>
-  <div class="button">
-    <button id="add" type="submit" [disabled]="!formParkingSpot.valid">Cadastrar</button>
-    <button id="clean" type="button" (click)="clean()">Limpar</button>
-  </div>
-</form>
+  </form>
+  <div>
+    <hr />
 
-<hr />
-
-<div class="spot-content">
-  <div class="search">
-    <input type="text" name="search" id="search" placeholder="Procurar" autocomplete="off"/>
-    <select name="filter" id="filter">
-      <option value="empty">Vagas Vazias</option>
-      <option value="occupied">Vagas Ocupadas</option>
-    </select>
-    <select name="block" id="block">
-      <option value="blockA">Bloco A</option>
-      <option value="blockB">Bloco B</option>
-    </select>
-    <select name="order" id="order">
-      <option value="asc">Ordem Crescente</option>
-      <option value="desc">Ordem Decrescente</option>
-    </select>
-    <button><img src="assets/icons/search.svg" alt="search-icon">Procurar</button>
-  </div>
-  <ng-container *ngIf="parkingSpots.length > 0; else noData">
-    <table>
-      <thead>
-        <tr>
-          <td>#</td>
-          <td *ngFor="let title of titles">{{ title }}</td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let spot of parkingSpots; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ spot.parkingSpotNumber }}</td>
-          <td>{{ spot.licensePlateCar }}</td>
-          <td>{{ spot.brandCar }}</td>
-          <td>{{ spot.modelCar }}</td>
-          <td>{{ spot.responsibleName }}</td>
-          <td>{{ spot.apartment }}</td>
-          <td>{{ spot.block }}</td>
-          <td>
-            <button id="update">Editar</button>
-            <button id="delete" (click)="deleteParkingSpot(spot)">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </ng-container>
-  <ng-template #noData>
-    <div class="no-data-message">
-      <h2>No data found...</h2>
+    <div class="spot-content">
+      <div class="search">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Procurar"
+          autocomplete="off"
+        />
+        <select name="filter" id="filter">
+          <option value="empty">Vagas Vazias</option>
+          <option value="occupied">Vagas Ocupadas</option>
+        </select>
+        <select name="block" id="block">
+          <option value="blockA">Bloco A</option>
+          <option value="blockB">Bloco B</option>
+        </select>
+        <select name="order" id="order">
+          <option value="asc">Ordem Crescente</option>
+          <option value="desc">Ordem Decrescente</option>
+        </select>
+        <button>
+          <img src="assets/icons/search.svg" alt="search-icon" />Procurar
+        </button>
+      </div>
+      <ng-container *ngIf="loading">
+        <div class="loading">
+          <mat-progress-spinner
+            [color]="color"
+            [mode]="mode"
+            [diameter]="50">  
+          </mat-progress-spinner>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="parkingSpots.length > 0; else noData">
+        <table>
+          <thead>
+            <tr>
+              <td>#</td>
+              <td *ngFor="let title of titles">{{ title }}</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let spot of parkingSpots; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ spot.parkingSpotNumber }}</td>
+              <td>{{ spot.licensePlateCar }}</td>
+              <td>{{ spot.brandCar }}</td>
+              <td>{{ spot.modelCar }}</td>
+              <td>{{ spot.responsibleName }}</td>
+              <td>{{ spot.apartment }}</td>
+              <td>{{ spot.block }}</td>
+              <td>
+                <button id="update" (click)="updateParkingSpot(spot, i)">Editar</button>
+                <button id="delete" (click)="deleteParkingSpot(spot)">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-template #noData>
+        <div class="no-data-message">
+          <h2>No data found...</h2>
+        </div>
+      </ng-template>
     </div>
-  </ng-template> 
+  </div>
 </div>
