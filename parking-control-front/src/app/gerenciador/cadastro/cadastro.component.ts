@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
 import { tap } from 'rxjs';
 
-import {ThemePalette} from '@angular/material/core';
-import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cadastro',
@@ -35,6 +35,7 @@ export class CadastroComponent {
     this.formInit();
     this.getParkingSpots();
     this.titles = this.ps.getTitltes();
+    this.changeForm();
   }
 
   formInit() {
@@ -54,6 +55,7 @@ export class CadastroComponent {
   onSubmit() {
     this.entityParkingSpot = this.formParkingSpot.value;
     if(this.edit) {
+      this.changeForm();
       this.ps.updateParkingSpot(this.entityParkingSpot).subscribe((parkingSpot) => this.parkingSpots[this.indexEdit] = parkingSpot);
     } else {
       this.ps.createParkingSpot(this.entityParkingSpot).subscribe(parkingSpot => this.parkingSpots.push(parkingSpot));
@@ -82,6 +84,14 @@ export class CadastroComponent {
   deleteParkingSpot(parkingSpot: ParkingSpot) {
     this.ps.deleteParkingSpot(parkingSpot).subscribe();
     this.parkingSpots = this.parkingSpots.filter((spot) => spot !== parkingSpot)
+    this.formInit();
   }
 
+  changeForm() {
+    this.formParkingSpot.get("parkingSpotNumber")?.valueChanges.subscribe((value: String) => { 
+      let parkingSpotNumber = value.split(/([0-9]+)/);
+      this.formParkingSpot.get("apartment")?.setValue(parkingSpotNumber[1]);
+      this.formParkingSpot.get("block")?.setValue(parkingSpotNumber[2]); 
+    });
+  }
 }
