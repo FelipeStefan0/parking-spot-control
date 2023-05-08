@@ -15,8 +15,6 @@ public class ParkingSpotDtos {
     @NotBlank
     private String modelCar;
     @NotBlank
-    private String colorCar;
-    @NotBlank
     private String responsibleName;
     @NotBlank
     private String apartment;
@@ -53,14 +51,6 @@ public class ParkingSpotDtos {
 
     public void setModelCar(String modelCar) {
         this.modelCar = modelCar;
-    }
-
-    public String getColorCar() {
-        return colorCar;
-    }
-
-    public void setColorCar(String colorCar) {
-        this.colorCar = colorCar;
     }
 
     public String getResponsibleName() {

@@ -18,9 +18,9 @@
 }
 
 .container {
-  width: 80vw;
+  width: 70vw;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 3.125rem;
   padding: 1.25rem;
 }
 
@@ -58,7 +58,7 @@ form {
     &-3 {
       display: grid;
       justify-content: space-between;
-      grid-template-columns: repeat(4, 24.5%);
+      grid-template-columns: repeat(3, 33%);
     }
     &-1,
     &-2,
@@ -66,48 +66,48 @@ form {
       margin-bottom: 1.875rem;
     }
   }
-}
-
-div.button {
-  display: flex;
-  button {
-    position: relative;
-    background-color: var(--blue-sky);
-    color: white;
-    font-size: 1.125rem;
-    width: 25%;
-    margin-right: 1.25rem;
-    padding: 0.625rem;
-    border: none;
-    border-radius: 0.3125rem;
-    outline: none;
-    cursor: pointer;
-    &:active {
-      background-color: #3676c0;
-      transition: 0.2s;
+  div.button {
+    display: flex;
+    margin-bottom: 1.875rem;
+    button {
+      position: relative;
+      background-color: var(--blue-sky);
+      color: white;
+      font-size: 1.125rem;
+      width: 16%;
+      margin-right: .625rem;
+      padding: 0.625rem;
+      border: none;
+      border-radius: 0.3125rem;
+      outline: none;
+      cursor: pointer;
+      &:active {
+        background-color: #3676c0;
+        transition: 0.2s;
+      }
     }
-  }
-  button#add:disabled {
-    background-color: var(--light-gray);
-    color: white;
-    font-size: 1.125rem;
-    width: 25%;
-    padding: 0.625rem;
-    border: none;
-    border-radius: 0.3125rem;
+    button#add:disabled {
+      background-color: var(--light-gray);
+      color: white;
+      font-size: 1.125rem;
+      width: 16%;
+      padding: 0.625rem;
+      border: none;
+      border-radius: 0.3125rem;
+    }
   }
 }
 
 hr {
   background-color: var(--light-gray);
-  width: 80vw;
+  width: 70vw;
   margin: 0 auto;
   height: 0.0625rem;
   border: none;
 }
 
 .spot-content {
-  width: 80vw;
+  width: 70vw;
   margin: 0 auto;
   position: relative;
   .search {
@@ -145,8 +145,9 @@ hr {
     }
   }
   table {
-    width: 100%;
+    width: 70vw;
     border-spacing: 0;
+    margin: 0 auto;
     thead {
       background-color: var(--blue-sky);
       color: white;
@@ -157,8 +158,6 @@ hr {
       }
     }
     tbody {
-      background-color: #4691e7;
-      color: white;
       tr {
         text-align: center;
         td {
@@ -205,6 +204,6 @@ hr {
   .no-data-message {
     width: 100%;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 3.125rem;
   }
 }

@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { GerenciadorComponent } from './gerenciador/gerenciador.component';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

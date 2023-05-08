@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
@@ -6,6 +6,8 @@ import { tap } from 'rxjs';
 
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+
+import titles from '../../../assets/titles.json'
 
 @Component({
   selector: 'app-cadastro',
@@ -24,7 +26,7 @@ export class CadastroComponent {
 
   formParkingSpot!: FormGroup;
 
-  titles: String[] = [];
+  displayedColumns: String[] = titles.titles;
 
   edit: boolean = false;
   indexEdit!: number;
@@ -34,7 +36,6 @@ export class CadastroComponent {
   ngOnInit() {
     this.formInit();
     this.getParkingSpots();
-    this.titles = this.ps.getTitltes();
     this.changeForm();
   }
 
@@ -44,7 +45,6 @@ export class CadastroComponent {
       licensePlateCar: ['', Validators.required],
       brandCar: ['', Validators.required],
       modelCar: ['', Validators.required],
-      colorCar: ['', Validators.required],
       responsibleName: ['', Validators.required],
       apartment: ['', Validators.required],
       block: ['', Validators.required],
