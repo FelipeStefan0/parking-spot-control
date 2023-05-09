@@ -1,93 +1,98 @@
 <div class="container">
-  <form [formGroup]="formParkingSpot" (ngSubmit)="onSubmit()">
-    <div class="grid-1">
-      <div class="item-1">
-        <label for="parkingSpotNumber">Vaga:</label>
-        <input
-          type="text"
-          id="parkingSpotNumber"
-          formControlName="parkingSpotNumber"
-          autocomplete="off"
-        />
+  <mat-card class="card">
+    <form [formGroup]="formParkingSpot" (ngSubmit)="onSubmit()">
+      <div class="grid-1">
+        <div class="item-1">
+          <label for="parkingSpotNumber">Vaga:</label>
+          <input
+            type="text"
+            id="parkingSpotNumber"
+            formControlName="parkingSpotNumber"
+            autocomplete="off"
+          />
+        </div>
+        <div class="item-2">
+          <label for="apartment">Apartamento:</label>
+          <input
+            type="text"
+            name="apartment"
+            formControlName="apartment"
+            autocomplete="off"
+            readonly
+          />
+        </div>
+        <div class="item-3">
+          <label for="block">Bloco:</label>
+          <input
+            type="text"
+            name="block"
+            formControlName="block"
+            autocomplete="off"
+            readonly
+          />
+        </div>
       </div>
-      <div class="item-2">
-        <label for="apartment">Apartamento:</label>
-        <input
-          type="text"
-          name="apartment"
-          formControlName="apartment"
-          autocomplete="off"
-          readonly
-        />
+      <div class="grid-2">
+        <div class="item-1">
+          <label for="responsibleName">Nome do Responsável:</label>
+          <input
+            type="text"
+            name="responsibleName"
+            formControlName="responsibleName"
+            autocomplete="off"
+          />
+        </div>
       </div>
-      <div class="item-3">
-        <label for="block">Bloco:</label>
-        <input
-          type="text"
-          name="block"
-          formControlName="block"
-          autocomplete="off"
-          readonly
-        />
+      <div class="grid-3">
+        <div class="item-1">
+          <label for="licensePlateCar">Placa:</label>
+          <input
+            type="text"
+            name="licensePlateCar"
+            formControlName="licensePlateCar"
+            autocomplete="off"
+          />
+        </div>
+        <div class="item-2">
+          <label for="brandCar">Marca:</label>
+          <input
+            type="text"
+            name="brandCar"
+            formControlName="brandCar"
+            autocomplete="off"
+          />
+        </div>
+        <div class="item-3">
+          <label for="modelCar">Modelo:</label>
+          <input
+            type="text"
+            name="modelCar"
+            formControlName="modelCar"
+            autocomplete="off"
+          />
+        </div>
       </div>
-    </div>
-    <div class="grid-2">
-      <div class="item-1">
-        <label for="responsibleName">Nome do Responsável:</label>
-        <input
-          type="text"
-          name="responsibleName"
-          formControlName="responsibleName"
-          autocomplete="off"
-        />
+      <div class="button">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!formParkingSpot.valid"
+        >
+          {{ edit ? "Editar" : "Cadastrar" }}
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="formInit()"
+          *ngIf="formParkingSpot.dirty || formParkingSpot.valid"
+        >
+          Limpar
+        </button>
       </div>
-    </div>
-    <div class="grid-3">
-      <div class="item-1">
-        <label for="licensePlateCar">Placa:</label>
-        <input
-          type="text"
-          name="licensePlateCar"
-          formControlName="licensePlateCar"
-          autocomplete="off"
-        />
-      </div>
-      <div class="item-2">
-        <label for="brandCar">Marca:</label>
-        <input
-          type="text"
-          name="brandCar"
-          formControlName="brandCar"
-          autocomplete="off"
-        />
-      </div>
-      <div class="item-3">
-        <label for="modelCar">Modelo:</label>
-        <input
-          type="text"
-          name="modelCar"
-          formControlName="modelCar"
-          autocomplete="off"
-        />
-      </div>
-      <div class="item-4">
-        <label for="">Cor:</label>
-        <input
-          type="text"
-          name="colorCar"
-          formControlName="colorCar"
-          autocomplete="off"
-        />
-      </div>
-    </div>
-    <div class="button">
-      <button id="add" type="submit" [disabled]="!formParkingSpot.valid">{{ edit ? "Editar" : "Cadastrar"}}</button>
-      <button id="clean" type="button" (click)="formInit()">Limpar</button>
-    </div>
-  </form>
+    </form>
+  </mat-card>
   <div>
     <hr />
-
     <div class="spot-content">
       <div class="search">
         <input
@@ -113,42 +118,80 @@
           <img src="assets/icons/search.svg" alt="search-icon" />Procurar
         </button>
       </div>
-      <ng-container *ngIf="loading">
-        <div class="loading">
-          <mat-progress-spinner
-            [color]="color"
-            [mode]="mode"
-            [diameter]="50">  
-          </mat-progress-spinner>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="parkingSpots.length > 0; else noData">
-        <table>
-          <thead>
-            <tr>
-              <td>#</td>
-              <td *ngFor="let title of titles">{{ title }}</td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let spot of parkingSpots; let i = index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ spot.parkingSpotNumber }}</td>
-              <td>{{ spot.licensePlateCar }}</td>
-              <td>{{ spot.brandCar }}</td>
-              <td>{{ spot.modelCar }}</td>
-              <td>{{ spot.responsibleName }}</td>
-              <td>{{ spot.apartment }}</td>
-              <td>{{ spot.block }}</td>
-              <td>
-                <button id="update" (click)="updateParkingSpot(spot, i)">Editar</button>
-                <button id="delete" (click)="deleteParkingSpot(spot)">Excluir</button>
+      <div class="table">
+        <mat-card>
+          <table
+            mat-table
+            [dataSource]="parkingSpots"
+            *ngIf="parkingSpots.length > 0; else noData"
+          >
+            <ng-container matColumnDef="VAGA">
+              <th mat-header-cell *matHeaderCellDef>Vaga</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.parkingSpotNumber }}
               </td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
+            </ng-container>
+
+            <ng-container matColumnDef="PLACA">
+              <th mat-header-cell *matHeaderCellDef>Placa</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.licensePlateCar }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="MARCA">
+              <th mat-header-cell *matHeaderCellDef>Marca</th>
+              <td mat-cell *matCellDef="let element">{{ element.brandCar }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="MODELO">
+              <th mat-header-cell *matHeaderCellDef>Modelo</th>
+              <td mat-cell *matCellDef="let element">{{ element.modelCar }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="RESPONSÁVEL">
+              <th mat-header-cell *matHeaderCellDef>Responsável</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.responsibleName }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="APARTAMENTO">
+              <th mat-header-cell *matHeaderCellDef>Apartamento</th>
+              <td mat-cell *matCellDef="let element">{{ element.apartment }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="BLOCO">
+              <th mat-header-cell *matHeaderCellDef>Bloco</th>
+              <td mat-cell *matCellDef="let element">{{ element.block }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="AÇÕES">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;">Ações</th>
+              <td mat-cell id="buttons" *matCellDef="let element; let i = index">
+                <button
+                  mat-mini-fab
+                  color="primary"
+                  (click)="updateParkingSpot(element, i)"
+                  style="margin-left: .625rem;"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-mini-fab
+                  color="warn"
+                  (click)="deleteParkingSpot(element)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card>
+      </div>
       <ng-template #noData>
         <div class="no-data-message">
           <h2>No data found...</h2>

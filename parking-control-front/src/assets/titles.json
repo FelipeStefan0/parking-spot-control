@@ -4,8 +4,9 @@
         "PLACA",
         "MARCA",
         "MODELO",
-        "RESPOSÁVEL",
+        "RESPONSÁVEL",
         "APARTAMENTO",
-        "BLOCO"
+        "BLOCO",
+        "AÇÕES"
     ]
 }

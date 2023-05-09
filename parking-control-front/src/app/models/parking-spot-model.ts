@@ -3,7 +3,6 @@ export interface ParkingSpot {
     licensePlateCar: string;
     brandCar: string;
     modelCar: string;
-    colorCar: string;
     responsibleName: string;
     apartment: string;
     block: string;

@@ -22,8 +22,6 @@ public class ParkingSpotModel implements Serializable {
     private String brandCar;
     @Column(nullable = false, length = 70)
     private String modelCar;
-    @Column(nullable = false, length = 70)
-    private String colorCar;
     @Column(nullable = false)
     private LocalDateTime registrationDate;
     @Column(nullable = false, length = 130)
@@ -73,14 +71,6 @@ public class ParkingSpotModel implements Serializable {
 
     public void setModelCar(String modelCar) {
         this.modelCar = modelCar;
-    }
-
-    public String getColorCar() {
-        return colorCar;
-    }
-
-    public void setColorCar(String colorCar) {
-        this.colorCar = colorCar;
     }
 
     public LocalDateTime getRegistrationDate() {
