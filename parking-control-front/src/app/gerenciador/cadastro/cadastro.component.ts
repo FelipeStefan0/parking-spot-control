@@ -19,8 +19,6 @@ export class CadastroComponent {
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
 
-  loading !: boolean;
-
   entityParkingSpot!: ParkingSpot;
   parkingSpots: ParkingSpot[] = [];
 
@@ -60,19 +58,12 @@ export class CadastroComponent {
     } else {
       this.ps.createParkingSpot(this.entityParkingSpot).subscribe(parkingSpot => this.parkingSpots.push(parkingSpot));
     }
-
     this.formInit();
     this.edit = false;
   }
 
   getParkingSpots() {
-    this.ps.getParkingSpots()
-    .pipe(
-      tap(() => this.loading = true))
-    .subscribe((spot) => { 
-      this.parkingSpots = spot,
-      this.loading = false
-    });
+    this.ps.getParkingSpots().subscribe((spot) => this.parkingSpots = spot);
   }
 
   updateParkingSpot(parkingSpot: ParkingSpot, index: number) {
