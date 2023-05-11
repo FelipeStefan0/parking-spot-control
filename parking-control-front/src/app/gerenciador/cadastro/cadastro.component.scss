@@ -43,11 +43,6 @@ form {
     border: 0.0625rem solid;
     border-color: var(--blue-sky);
   }
-  input {
-    &:nth-child(1):focus, &:nth-child(2):focus {
-      border-color: rgb(172, 172, 172);
-    }
-  }
   .grid {
     &-1 {
       display: grid;
