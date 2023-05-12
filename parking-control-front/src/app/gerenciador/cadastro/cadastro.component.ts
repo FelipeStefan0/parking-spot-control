@@ -34,7 +34,6 @@ export class CadastroComponent {
   ngOnInit() {
     this.formInit();
     this.getParkingSpots();
-    this.changeForm();
   }
 
   formInit() {
@@ -48,15 +47,15 @@ export class CadastroComponent {
       block: ['', Validators.required],
     })
     this.edit = false;
+    this.changeForm();
   }
 
   onSubmit() {
     this.entityParkingSpot = this.formParkingSpot.value;
     if(this.edit) {
-      this.changeForm();
       this.ps.updateParkingSpot(this.entityParkingSpot).subscribe((parkingSpot) => this.parkingSpots[this.indexEdit] = parkingSpot);
     } else {
-      this.ps.createParkingSpot(this.entityParkingSpot).subscribe(parkingSpot => this.parkingSpots.push(parkingSpot));
+      this.ps.createParkingSpot(this.entityParkingSpot).subscribe((parkingSpot) => this.parkingSpots.push(parkingSpot));
     }
     this.formInit();
     this.edit = false;
