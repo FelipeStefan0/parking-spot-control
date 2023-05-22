@@ -120,13 +120,11 @@
           <img src="assets/icons/search.svg" alt="search-icon" />Procurar
         </button>
       </div>
-      <div class="table">
+      <div class="table" *ngIf="parkingSpots.length > 0; else loading">
         <mat-card>
           <table
             mat-table
-            [dataSource]="parkingSpots"
-            *ngIf="parkingSpots.length > 0; else noData"
-          >
+            [dataSource]="parkingSpots">
 
             <ng-container matColumnDef="#">
               <th mat-header-cell *matHeaderCellDef></th>
@@ -182,7 +180,7 @@
                 <button
                   mat-icon-button
                   color="primary"
-                  (click)="updateParkingSpot(element, i)"
+                  (click)="updateParkingSpot(element)"
                   style="margin-left: .625rem;"
                   title="Editar"
                 >
@@ -202,12 +200,17 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
+          <div class="no-data-message" *ngIf="parkingSpots.length == 0">
+            <h2>No data found...</h2>
+          </div>
         </mat-card>
       </div>
-      <ng-template #noData>
-        <div class="no-data-message">
-          <h2>No data found...</h2>
-        </div>
+      <ng-template #loading>
+        <mat-spinner
+          class="spinner-loading"
+          diameter="40"
+          mode="indeterminate">
+        </mat-spinner>
       </ng-template>
     </div>
   </div>

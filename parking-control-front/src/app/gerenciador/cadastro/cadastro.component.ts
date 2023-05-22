@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
-import { lastValueFrom, tap } from 'rxjs';
+import { finalize, lastValueFrom, tap } from 'rxjs';
 
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
@@ -27,7 +27,7 @@ export class CadastroComponent {
   displayedColumns: String[] = titles.titles;
 
   edit: boolean = false;
-  indexEdit!: number;
+  loading?: boolean;
 
   constructor(private fb: FormBuilder, private ps: ParkingSpotService) {}
 
@@ -64,15 +64,23 @@ export class CadastroComponent {
   }
 
   getParkingSpots() {
-    this.ps.getParkingSpots().subscribe(parkingSpot => { 
+    this.ps.getParkingSpots()
+    .pipe(
+      tap(() => {
+        this.loading = true;
+      }),
+      finalize(() => {
+        this.loading = false;
+      })
+    )
+    .subscribe(parkingSpot => { 
       this.parkingSpots = parkingSpot;
       this.parkingSpots = this.parkingSpots.sort((a,b) => a.responsibleName.localeCompare(b.responsibleName));
     });
   }
 
-  updateParkingSpot(parkingSpot: ParkingSpot, index: number) {
+  updateParkingSpot(parkingSpot: ParkingSpot) {
     this.formParkingSpot?.patchValue(parkingSpot);
-    this.indexEdit = index;
     this.edit = true;
   }
 
