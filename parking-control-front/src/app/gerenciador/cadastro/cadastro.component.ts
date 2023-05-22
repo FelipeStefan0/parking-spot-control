@@ -33,7 +33,7 @@ export class CadastroComponent {
 
   ngOnInit() {
     this.formInit();
-    this.ps.getParkingSpots().subscribe((spot) => this.parkingSpots = spot);
+    this.getParkingSpots();
   }
 
   formInit() {
@@ -54,14 +54,20 @@ export class CadastroComponent {
     this.entityParkingSpot = this.formParkingSpot.value;
     if(this.edit) {
       await lastValueFrom(this.ps.updateParkingSpot(this.entityParkingSpot));
-      this.ps.getParkingSpots().subscribe(parkingSpots => this.parkingSpots = parkingSpots);
+      this.getParkingSpots();
     } else {
       await lastValueFrom(this.ps.createParkingSpot(this.entityParkingSpot));
-      this.ps.getParkingSpots().subscribe(parkingSpot => this.parkingSpots = parkingSpot);
-      this.parkingSpots.sort();
+      this.getParkingSpots();
     }
     this.formInit();
     this.edit = false;
+  }
+
+  getParkingSpots() {
+    this.ps.getParkingSpots().subscribe(parkingSpot => { 
+      this.parkingSpots = parkingSpot;
+      this.parkingSpots = this.parkingSpots.sort((a,b) => a.responsibleName.localeCompare(b.responsibleName));
+    });
   }
 
   updateParkingSpot(parkingSpot: ParkingSpot, index: number) {
