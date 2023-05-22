@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
-import { tap } from 'rxjs';
+import { lastValueFrom, tap } from 'rxjs';
 
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
@@ -33,7 +33,7 @@ export class CadastroComponent {
 
   ngOnInit() {
     this.formInit();
-    this.getParkingSpots();
+    this.ps.getParkingSpots().subscribe((spot) => this.parkingSpots = spot);
   }
 
   formInit() {
@@ -50,19 +50,18 @@ export class CadastroComponent {
     this.changeForm();
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.entityParkingSpot = this.formParkingSpot.value;
     if(this.edit) {
-      this.ps.updateParkingSpot(this.entityParkingSpot).subscribe((parkingSpot) => this.parkingSpots[this.indexEdit] = parkingSpot);
+      await lastValueFrom(this.ps.updateParkingSpot(this.entityParkingSpot));
+      this.ps.getParkingSpots().subscribe(parkingSpots => this.parkingSpots = parkingSpots);
     } else {
-      this.ps.createParkingSpot(this.entityParkingSpot).subscribe((parkingSpot) => this.parkingSpots.push(parkingSpot));
+      await lastValueFrom(this.ps.createParkingSpot(this.entityParkingSpot));
+      this.ps.getParkingSpots().subscribe(parkingSpot => this.parkingSpots = parkingSpot);
+      this.parkingSpots.sort();
     }
     this.formInit();
     this.edit = false;
-  }
-
-  getParkingSpots() {
-    this.ps.getParkingSpots().subscribe((spot) => this.parkingSpots = spot);
   }
 
   updateParkingSpot(parkingSpot: ParkingSpot, index: number) {
