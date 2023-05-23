@@ -20,14 +20,13 @@ export class CadastroComponent {
   mode: ProgressSpinnerMode = 'indeterminate';
 
   entityParkingSpot!: ParkingSpot;
-  parkingSpots: ParkingSpot[] = [];
+  parkingSpots!: ParkingSpot[];
 
   formParkingSpot!: FormGroup;
 
   displayedColumns: String[] = titles.titles;
 
   edit: boolean = false;
-  loading?: boolean;
 
   constructor(private fb: FormBuilder, private ps: ParkingSpotService) {}
 
@@ -65,14 +64,6 @@ export class CadastroComponent {
 
   getParkingSpots() {
     this.ps.getParkingSpots()
-    .pipe(
-      tap(() => {
-        this.loading = true;
-      }),
-      finalize(() => {
-        this.loading = false;
-      })
-    )
     .subscribe(parkingSpot => { 
       this.parkingSpots = parkingSpot;
       this.parkingSpots = this.parkingSpots.sort((a,b) => a.responsibleName.localeCompare(b.responsibleName));

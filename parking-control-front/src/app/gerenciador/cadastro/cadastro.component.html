@@ -120,7 +120,7 @@
           <img src="assets/icons/search.svg" alt="search-icon" />Procurar
         </button>
       </div>
-      <div class="table" *ngIf="parkingSpots.length > 0; else loading">
+      <div class="table" *ngIf="parkingSpots; else loading">
         <mat-card>
           <table
             mat-table
