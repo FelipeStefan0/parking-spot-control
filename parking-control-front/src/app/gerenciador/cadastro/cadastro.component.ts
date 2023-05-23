@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
 import { finalize, lastValueFrom, tap } from 'rxjs';
@@ -36,14 +36,14 @@ export class CadastroComponent {
   }
 
   formInit() {
-    this.formParkingSpot = this.fb.group({
-      parkingSpotNumber: ['', Validators.required],
-      licensePlateCar: ['', Validators.required],
-      brandCar: ['', Validators.required],
-      modelCar: ['', Validators.required],
-      responsibleName: ['', Validators.required],
-      apartment: ['', Validators.required],
-      block: ['', Validators.required],
+    this.formParkingSpot = new FormGroup({
+      parkingSpotNumber: new FormControl('', Validators.required),
+      licensePlateCar: new FormControl('', Validators.required),
+      brandCar: new FormControl('', Validators.required),
+      modelCar: new FormControl('', Validators.required),
+      responsibleName: new FormControl('', Validators.required),
+      apartment: new FormControl(''),
+      block: new FormControl(''),
     })
     this.edit = false;
     this.changeForm();
