@@ -1,12 +1,13 @@
 {
     "titles":[
+        "#",
+        "RESPONSÁVEL",
         "VAGA",
+        "APARTAMENTO",
+        "BLOCO",
         "PLACA",
         "MARCA",
         "MODELO",
-        "RESPONSÁVEL",
-        "APARTAMENTO",
-        "BLOCO",
         "AÇÕES"
     ]
 }

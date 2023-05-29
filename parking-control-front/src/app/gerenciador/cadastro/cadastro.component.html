@@ -2,16 +2,19 @@
   <mat-card class="card">
     <form [formGroup]="formParkingSpot" (ngSubmit)="onSubmit()">
       <div class="grid-1">
-        <div class="item-1">
+        <div class="item">
           <label for="parkingSpotNumber">Vaga:</label>
           <input
             type="text"
-            id="parkingSpotNumber"
-            formControlName="parkingSpotNumber"
+            name="parkingSpotNumber"
+            [formControlName]="parkingSpotNumber"
             autocomplete="off"
           />
+          <div *ngIf="" class="alert">
+            <p>Campo obrigatório</p>
+          </div>
         </div>
-        <div class="item-2">
+        <div class="item">
           <label for="apartment">Apartamento:</label>
           <input
             type="text"
@@ -21,7 +24,7 @@
             readonly
           />
         </div>
-        <div class="item-3">
+        <div class="item">
           <label for="block">Bloco:</label>
           <input
             type="text"
@@ -93,7 +96,7 @@
       </div>
     </form>
   </mat-card>
-  <div>
+  <div class="content">
     <hr />
     <div class="spot-content">
       <div class="search">
@@ -120,18 +123,41 @@
           <img src="assets/icons/search.svg" alt="search-icon" />Procurar
         </button>
       </div>
-      <div class="table">
+      <div class="table" *ngIf="parkingSpots; else loading">
         <mat-card>
           <table
             mat-table
-            [dataSource]="parkingSpots"
-            *ngIf="parkingSpots.length > 0; else noData"
-          >
+            [dataSource]="parkingSpots">
+
+            <ng-container matColumnDef="#">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element; let i = index;">
+                {{ i+1 }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="RESPONSÁVEL">
+              <th mat-header-cell *matHeaderCellDef>Responsável</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.responsibleName }}
+              </td>
+            </ng-container>
+
             <ng-container matColumnDef="VAGA">
               <th mat-header-cell *matHeaderCellDef>Vaga</th>
               <td mat-cell *matCellDef="let element">
                 {{ element.parkingSpotNumber }}
               </td>
+            </ng-container>
+
+            <ng-container matColumnDef="APARTAMENTO">
+              <th mat-header-cell *matHeaderCellDef>Apartamento</th>
+              <td mat-cell *matCellDef="let element">{{ element.apartment }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="BLOCO">
+              <th mat-header-cell *matHeaderCellDef>Bloco</th>
+              <td mat-cell *matCellDef="let element">{{ element.block }}</td>
             </ng-container>
 
             <ng-container matColumnDef="PLACA">
@@ -151,38 +177,23 @@
               <td mat-cell *matCellDef="let element">{{ element.modelCar }}</td>
             </ng-container>
 
-            <ng-container matColumnDef="RESPONSÁVEL">
-              <th mat-header-cell *matHeaderCellDef>Responsável</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.responsibleName }}
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="APARTAMENTO">
-              <th mat-header-cell *matHeaderCellDef>Apartamento</th>
-              <td mat-cell *matCellDef="let element">{{ element.apartment }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="BLOCO">
-              <th mat-header-cell *matHeaderCellDef>Bloco</th>
-              <td mat-cell *matCellDef="let element">{{ element.block }}</td>
-            </ng-container>
-
             <ng-container matColumnDef="AÇÕES">
               <th mat-header-cell *matHeaderCellDef style="text-align: center;">Ações</th>
               <td mat-cell id="buttons" *matCellDef="let element; let i = index">
                 <button
-                  mat-mini-fab
+                  mat-icon-button
                   color="primary"
-                  (click)="updateParkingSpot(element, i)"
+                  (click)="updateParkingSpot(element)"
                   style="margin-left: .625rem;"
+                  title="Editar"
                 >
                   <mat-icon>edit</mat-icon>
                 </button>
                 <button
-                  mat-mini-fab
+                  mat-icon-button
                   color="warn"
                   (click)="deleteParkingSpot(element)"
+                  title="Deletar"
                 >
                   <mat-icon>delete</mat-icon>
                 </button>
@@ -192,12 +203,17 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
+          <div class="no-data-message" *ngIf="parkingSpots.length == 0">
+            <h2>No data found...</h2>
+          </div>
         </mat-card>
       </div>
-      <ng-template #noData>
-        <div class="no-data-message">
-          <h2>No data found...</h2>
-        </div>
+      <ng-template #loading>
+        <mat-spinner
+          class="spinner-loading"
+          diameter="40"
+          mode="indeterminate">
+        </mat-spinner>
       </ng-template>
     </div>
   </div>

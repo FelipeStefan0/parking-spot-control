@@ -16,7 +16,7 @@
   width: 70vw;
   margin: 0 auto;
   margin-top: 3.125rem;
-
+  padding-bottom: 3.125rem;
   .card {
     padding: 1.875rem;
   }
@@ -40,14 +40,25 @@ form {
   }
   input:focus {
     outline: none;
-    border: 0.0625rem solid;
-    border-color: var(--blue-sky);
+    border: 0.0625rem solid var(--blue-sky);
+  }
+  input.ng-invalid.ng-touched.ng-dirty {
+    border-color: rgb(250, 171, 171);
   }
   .grid {
     &-1 {
       display: grid;
       justify-content: space-between;
       grid-template-columns: repeat(3, 33%);
+      .item {
+        &:nth-child(2), &:nth-child(3) {
+          pointer-events: none;
+        }
+        &:nth-child(2) input:focus, &:nth-child(3) input:focus {
+          border-color: rgb(168, 168, 168); 
+          pointer-events: none;
+        }
+      }
     }
     &-2 {
       display: grid;
@@ -86,8 +97,6 @@ hr {
 }
 
 .spot-content {
-  width: 70vw;
-  margin: 0 auto;
   position: relative;
   .search {
     margin: 1.125rem 0 1.125rem 0;
@@ -136,6 +145,9 @@ hr {
     width: 100%;
     text-align: center;
     margin: 0.5rem 0 0.5rem 0;
+  }
+  .spinner-loading {
+    margin: 0 auto;
   }
 }
 
