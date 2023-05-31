@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
-import { finalize, lastValueFrom, tap } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
@@ -27,6 +27,7 @@ export class CadastroComponent {
   displayedColumns: String[] = titles.titles;
 
   edit: boolean = false;
+  index!: number;
 
   constructor(private fb: FormBuilder, private ps: ParkingSpotService) {}
 
@@ -47,6 +48,7 @@ export class CadastroComponent {
     })
     this.edit = false;
     this.changeForm();
+    this.getParkingSpots();
   }
 
   async onSubmit() {
@@ -70,9 +72,10 @@ export class CadastroComponent {
     });
   }
 
-  updateParkingSpot(parkingSpot: ParkingSpot) {
+  updateParkingSpot(parkingSpot: ParkingSpot, index: number) {
     this.formParkingSpot?.patchValue(parkingSpot);
     this.edit = true;
+    document.getElementsByTagName('tr')[index+1].style.backgroundColor = "rgb(250, 250, 250)";
   }
 
   deleteParkingSpot(parkingSpot: ParkingSpot) {
