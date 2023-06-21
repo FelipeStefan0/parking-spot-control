@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 
 import { GerenciadorModule } from './gerenciador/gerenciador.module';
 import { HomeModule } from './home/home.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HomeModule } from './home/home.module';
     HttpClientModule,
     GerenciadorModule,
     HomeModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
