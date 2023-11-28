@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
+import { TableComponent } from './components/table/table.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { CardComponent } from './components/card/card.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 
 @NgModule({
   declarations: [
-    FooterComponent,
-    HeaderComponent
+  
+    PaginationComponent,
+       CardComponent,
+       LoaderComponent
   ],
   imports: [
     CommonModule,
   ],
   exports: [
-    FooterComponent,
-    HeaderComponent
   ]
 })
 export class SharedModule { }

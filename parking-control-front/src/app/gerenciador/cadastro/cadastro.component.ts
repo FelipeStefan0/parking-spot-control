@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { ParkingSpot } from '../../models/parking-spot-model';
 import { ParkingSpotService } from '../../services/parking-spot.service';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, map, tap } from 'rxjs';
 
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 import titles from '../../../assets/titles.json'
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-cadastro',
@@ -20,7 +21,7 @@ export class CadastroComponent {
   mode: ProgressSpinnerMode = 'indeterminate';
 
   entityParkingSpot!: ParkingSpot;
-  parkingSpots!: ParkingSpot[];
+  parkingSpots = new MatTableDataSource<ParkingSpot>();
 
   formParkingSpot!: FormGroup;
 
@@ -66,10 +67,13 @@ export class CadastroComponent {
 
   getParkingSpots() {
     this.ps.getParkingSpots()
-    .subscribe(parkingSpot => { 
-      this.parkingSpots = parkingSpot;
-      this.parkingSpots = this.parkingSpots.sort((a,b) => a.responsibleName.localeCompare(b.responsibleName));
-    });
+    .pipe(
+      tap((res:any) => this.parkingSpots.data = res.content),
+      map(() => {
+        this.parkingSpots.data = this.parkingSpots.data.sort((a,b) => a.responsibleName.localeCompare(b.responsibleName));
+      })
+    )
+    .subscribe()
   }
 
   updateParkingSpot(parkingSpot: ParkingSpot, index: number) {
@@ -79,8 +83,8 @@ export class CadastroComponent {
   }
 
   deleteParkingSpot(parkingSpot: ParkingSpot) {
-    this.ps.deleteParkingSpot(parkingSpot).subscribe();
-    this.parkingSpots = this.parkingSpots.filter((spot) => spot !== parkingSpot)
+    this.ps.deleteParkingSpot(parkingSpot).subscribe((res) => console.log(res));
+    this.parkingSpots.data = this.parkingSpots.data.filter((spot) => spot !== parkingSpot)
     this.formInit();
   }
 
@@ -88,7 +92,7 @@ export class CadastroComponent {
     this.formParkingSpot.get("parkingSpotNumber")?.valueChanges.subscribe((value: String) => { 
       let parkingSpotNumber = value.split(/([0-9]+)/);
       this.formParkingSpot.get("apartment")?.setValue(parkingSpotNumber[1]);
-      this.formParkingSpot.get("block")?.setValue(parkingSpotNumber[2]); 
+      this.formParkingSpot.get("block")?.setValue(parkingSpotNumber[2].toUpperCase()); 
     });
   }
 }

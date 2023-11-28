@@ -8,7 +8,7 @@
   margin-right: 0.625rem;
   padding: 0 0.5625rem 0 0.5625rem;
   font-size: 0.875rem;
-  border: 0.0625rem solid var(--light-gray);
+  border: 0.0625rem solid var(--gray);
   border-radius: 0.3125rem;
 }
 
@@ -40,7 +40,7 @@ form {
   }
   input:focus {
     outline: none;
-    border: 0.0625rem solid var(--blue-sky);
+    border: 0.0625rem solid var(--blue);
   }
   input.ng-invalid.ng-touched.ng-dirty {
     border-color: rgb(250, 171, 171);
@@ -89,7 +89,7 @@ form {
 }
 
 hr {
-  background-color: var(--light-gray);
+  background-color: var(--gray);
   width: 70vw;
   margin: 0 auto;
   height: 0.0625rem;
@@ -108,7 +108,7 @@ hr {
     select:focus {
       outline: none;
       border: 0.0625rem solid;
-      border-color: var(--blue-sky);
+      border-color: var(--blue);
     }
     button {
       font-size: .875rem;
