@@ -49,11 +49,6 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotService.save(parkingSpotModel));
     }
 
-//    @GetMapping
-//    public List<ParkingSpotModel> getAllParkingSpots() {
-//        return parkingSpotService.findAll();
-//    }
-
     @GetMapping
     public Page<ParkingSpotModel> getAllParkingSpots(@PageableDefault(size = 10, page = 0, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         return parkingSpotService.findAll(pageable);

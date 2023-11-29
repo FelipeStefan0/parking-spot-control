@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { GerenciadorModule } from './gerenciador/gerenciador.module';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     HttpClientModule,
     GerenciadorModule,
-    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
