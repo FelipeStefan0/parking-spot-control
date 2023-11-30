@@ -20,7 +20,6 @@ export class CadastroComponent {
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
 
-  entityParkingSpot!: ParkingSpot;
   parkingSpots = new MatTableDataSource<ParkingSpot>();
 
   formParkingSpot!: FormGroup;
@@ -38,31 +37,22 @@ export class CadastroComponent {
   }
 
   formInit() {
-    this.formParkingSpot = new FormGroup({
-      parkingSpotNumber: new FormControl('', Validators.required),
-      licensePlateCar: new FormControl('', Validators.required),
-      brandCar: new FormControl('', Validators.required),
-      modelCar: new FormControl('', Validators.required),
-      responsibleName: new FormControl('', Validators.required),
-      apartment: new FormControl(''),
-      block: new FormControl(''),
-    })
     this.edit = false;
     this.changeForm();
     this.getParkingSpots();
   }
 
-  async onSubmit() {
-    this.entityParkingSpot = this.formParkingSpot.value;
-    if(this.edit) {
-      await lastValueFrom(this.ps.updateParkingSpot(this.entityParkingSpot));
-      this.getParkingSpots();
-    } else {
-      await lastValueFrom(this.ps.createParkingSpot(this.entityParkingSpot));
-      this.getParkingSpots();
-    }
-    this.formInit();
-    this.edit = false;
+  async onSubmit(event:any) {
+    // this.entityParkingSpot = this.formParkingSpot.value;
+    // if(this.edit) {
+    //   await lastValueFrom(this.ps.updateParkingSpot(this.entityParkingSpot));
+    //   this.getParkingSpots();
+    // } else {
+    //   await lastValueFrom(this.ps.createParkingSpot(this.entityParkingSpot));
+    //   this.getParkingSpots();
+    // }
+    // this.formInit();
+    // this.edit = false;
   }
 
   getParkingSpots() {

@@ -13,15 +13,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsComponent } from './cadastro/forms/forms.component';
 import { SearchComponent } from './cadastro/search/search.component';
+import { FormsComponent } from './cadastro/forms/forms.component';
 
 @NgModule({
   declarations: [
     GerenciadorComponent,
     CadastroComponent,
-    FormsComponent,
     SearchComponent,
+    FormsComponent
   ],
   imports: [
     CommonModule,

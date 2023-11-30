@@ -1,0 +1,73 @@
+@import "../../../../styles.scss";
+
+.content {
+  padding: 2rem;
+}
+
+form {
+  label {
+    background-color: white;
+    color: #555555;
+    font-weight: 600;
+    font-size: 0.875rem;
+    position: absolute;
+    margin: -0.6rem 0 0 0.75rem;
+    padding: 0 0.125rem 0 0.25rem;
+  }
+  input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    @include inputStyle;
+  }
+  input:focus {
+    outline: none;
+    border: 0.0625rem solid var(--blue);
+  }
+  input.ng-invalid.ng-touched.ng-dirty {
+    border-color: rgb(250, 171, 171);
+  }
+  .grid {
+    &-1 {
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: repeat(3, 33%);
+      .item {
+        &:nth-child(2),
+        &:nth-child(3) {
+          pointer-events: none;
+        }
+        &:nth-child(2) input:focus,
+        &:nth-child(3) input:focus {
+          border-color: rgb(168, 168, 168);
+          pointer-events: none;
+        }
+      }
+    }
+    &-2 {
+      display: grid;
+      grid-template-columns: repeat(1, 100%);
+    }
+    &-3 {
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: repeat(3, 33%);
+    }
+    &-1,
+    &-2,
+    &-3 {
+      margin-bottom: 1.875rem;
+    }
+  }
+  div.button {
+    display: flex;
+    button {
+      position: relative;
+      font-size: 1rem;
+      width: 16%;
+      height: 2.5rem;
+      margin-right: 0.625rem;
+      padding: 0.625rem;
+    }
+  }
+}
